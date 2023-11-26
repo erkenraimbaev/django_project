@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Изображение -->
+            <div class="col-md-4">
+                <img src="{{ object.image | mediapath_filter }}">
+            </div>
+
+            <!-- Информация о товаре -->
+            <div class="col-md-8">
+                <h2>{{ object.name_product }}</h2>
+                <p>Описание товара: {{ object.description }}</p>
+                <p>Цена: {{ object.price }} руб.</p>
+                <button class="btn btn-primary">Купить</button>
+            </div>
+
+
+        </div>
+    </div>
+
+</body>
+</html>
