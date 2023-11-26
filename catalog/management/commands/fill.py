@@ -16,9 +16,9 @@ class Command(BaseCommand):
             Category.objects.create(**category)
 
         product_list = [
-            {'name_product': 'Яблоко', 'description': 'Зеленое', 'category': '2', 'price': '100'},
-            {'name_product': 'Морковь', 'description': 'Оранжевая', 'category': '1', 'price': '30'},
-            {'name_product': 'Банан', 'description': 'Из Эквадора', 'category': '2', 'price': '100'}
+            {'name_product': 'Яблоко', 'description': 'Зеленое', 'image': 'media/catalog/яблоко.jpg', 'category': '2', 'price': '100'},
+            {'name_product': 'Морковь', 'description': 'Оранжевая', 'image': 'media/catalog/морковь.jpg', 'category': '1', 'price': '30'},
+            {'name_product': 'Банан', 'description': 'Из Эквадора', 'image': 'media/catalog/банан.jpg', 'category': '2', 'price': '100'}
         ]
 
         products_for_create = []

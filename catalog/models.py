@@ -17,7 +17,7 @@ class Category(models.Model):
         Строковое отображение объекта
         :return:
         """
-        return f'{self.name_category} {self.description}'
+        return f'{self.name_category}'
 
     class Meta:
         verbose_name = 'категория'
