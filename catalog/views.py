@@ -22,10 +22,10 @@ def contacts(request):
     return render(request, 'contacts.html')
 
 
-def product(request):
-    index_list = Product.objects.all()
+def product(request, product_id):
+    # index_list = Product.objects.all()
     context = {
-        'object_list': index_list,
-        'title': 'Карточка товара'
+        'title': 'Карточка товара',
+        'object': Product.objects.get(pk=product_id)
     }
-    return render(request, 'catalog/product.html', context)
+    return render(request, 'product.html', context)
