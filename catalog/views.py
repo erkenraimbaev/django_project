@@ -1,16 +1,28 @@
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Product
 
 
 # Create your views here.
-def home(request):
-    product_list = Product.objects.all()
-    context = {
-        'object_list': product_list,
-        'title': 'SkyStore'
-    }
-    return render(request, 'home.html', context)
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'product_list.html'
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail.html'
+
+
+# def home(request):
+#     product_list = Product.objects.all()
+#     context = {
+#         'object_list': product_list,
+#         'title': 'SkyStore'
+#     }
+#     return render(request, 'product_list.html', context)
 
 
 def contacts(request):
@@ -22,10 +34,10 @@ def contacts(request):
     return render(request, 'contacts.html')
 
 
-def product(request, pk):
-    # index_list = Product.objects.all()
-    context = {
-        'title': 'Карточка товара',
-        'object': Product.objects.get(pk=pk)
-    }
-    return render(request, 'product.html', context)
+# def product(request, pk):
+#     # index_list = Product.objects.all()
+#     context = {
+#         'title': 'Карточка товара',
+#         'object': Product.objects.get(pk=pk)
+#     }
+#     return render(request, 'product_detail.html', context)
