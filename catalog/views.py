@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 from catalog.models import Product
 
@@ -24,15 +24,19 @@ class ProductDetailView(DetailView):
 #     }
 #     return render(request, 'product_list.html', context)
 
+class ContactsView(TemplateView):
+    template_name = 'contacts.html'
+    extra_context = {
+        'title': 'Контакты'
+    }
 
-def contacts(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        phone_number = request.POST.get('phone')
-        message = request.POST.get('message')
-        print(f'Имя: {name}\nНомер телефона: {phone_number}\nСообщение: {message}')
-    return render(request, 'contacts.html')
-
+# def contacts(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         phone_number = request.POST.get('phone')
+#         message = request.POST.get('message')
+#         print(f'Имя: {name}\nНомер телефона: {phone_number}\nСообщение: {message}')
+#     return render(request, 'contacts.html')
 
 # def product(request, pk):
 #     # index_list = Product.objects.all()
