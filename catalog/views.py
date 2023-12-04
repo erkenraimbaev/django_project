@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, TemplateView
 
 from catalog.models import Product
@@ -8,12 +9,12 @@ from catalog.models import Product
 
 class ProductListView(ListView):
     model = Product
-    template_name = 'product_list.html'
+    # template_name = 'product_list.html'
 
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'product_detail.html'
+    # template_name = 'product_detail.html'
 
 
 # def home(request):
@@ -25,10 +26,18 @@ class ProductDetailView(DetailView):
 #     return render(request, 'product_list.html', context)
 
 class ContactsView(TemplateView):
-    template_name = 'contacts.html'
+    template_name = 'catalog/contacts.html'
     extra_context = {
         'title': 'Контакты'
     }
+
+    def post(self, request, *args, **kwargs):
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone')
+        message = request.POST.get('message')
+        print(f'Имя: {name}\nНомер телефона: {phone_number}\nСообщение: {message}')
+        return redirect(reverse('catalog:contacts'))
+
 
 # def contacts(request):
 #     if request.method == 'POST':
