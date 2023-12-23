@@ -56,3 +56,29 @@ class Product(models.Model):
     def truncate_table_restart_id(cls):
         with connection.cursor() as cursor:
             cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
+
+
+class Version(models.Model):
+    """
+    Модель для отображения версии продукта
+    """
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='название продукта')
+    version = models.PositiveIntegerField(verbose_name='номер версии')
+    name_version = models.CharField(max_length=150, verbose_name='название версии')
+    current_version = models.BooleanField(default=True, verbose_name='признак текущей версии')
+
+    def __str__(self):
+        """
+        Строковое отображение объекта
+        :return:
+        """
+        return f'{self.version} {self.name_version} {self.product} {self.current_version}'
+
+    class Meta:
+        verbose_name = 'версия'
+        verbose_name_plural = 'версии'
+
+    @classmethod
+    def truncate_table_restart_id(cls):
+        with connection.cursor() as cursor:
+            cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
