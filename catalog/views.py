@@ -6,19 +6,14 @@ from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Version
 
 
-# Create your views here.
-
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    # fields = ('name_product', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy('catalog:home')
 
 
 class ProductListView(ListView):
     model = Product
-
-    # template_name = 'product_list.html'
 
     def get_context_data(self, *args, **kwargs):
         context_data = super().get_context_data(*args, **kwargs)
@@ -35,13 +30,11 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
-    # template_name = 'product_detail.html'
 
 
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
-    # fields = ('name_product', 'description', 'image', 'category', 'price')
     success_url = reverse_lazy('catalog:home')
 
 
@@ -49,14 +42,6 @@ class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:home')
 
-
-# def home(request):
-#     product_list = Product.objects.all()
-#     context = {
-#         'object_list': product_list,
-#         'title': 'SkyStore'
-#     }
-#     return render(request, 'product_list.html', context)
 
 class ContactsView(TemplateView):
     template_name = 'catalog/contacts.html'
@@ -70,26 +55,3 @@ class ContactsView(TemplateView):
         message = request.POST.get('message')
         print(f'Имя: {name}\nНомер телефона: {phone_number}\nСообщение: {message}')
         return redirect(reverse('catalog:contacts'))
-
-
-# def contacts(request):
-#     if request.method == 'POST':
-#         name = request.POST.get('name')
-#         phone_number = request.POST.get('phone')
-#         message = request.POST.get('message')
-#         print(f'Имя: {name}\nНомер телефона: {phone_number}\nСообщение: {message}')
-#     return render(request, 'contacts.html')
-
-# def product(request, pk):
-#     # index_list = Product.objects.all()
-#     context = {
-#         'title': 'Карточка товара',
-#         'object': Product.objects.get(pk=pk)
-#     }
-#     return render(request, 'product_detail.html', context)
-
-# class VersionCreateView(CreateView):
-#     model = Version
-#     form_class = VersionForm
-#     # fields = ('name_product', 'description', 'image', 'category', 'price')
-#     success_url = reverse_lazy('catalog:home')

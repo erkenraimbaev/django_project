@@ -14,9 +14,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        # fields = '__all__'
         fields = ('name_product', 'description', 'image', 'category', 'price')
-        # exclude = 'date_making', 'date_changing'
 
     def clean_name_product(self):
         error_words = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно', 'обман', 'полиция', 'радар']
@@ -37,5 +35,4 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
 class VersionForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Version
-        # fields = '__all__'
         fields = ('version', 'name_version', 'product', 'current_version')
