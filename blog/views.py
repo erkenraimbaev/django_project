@@ -41,7 +41,6 @@ class BlogListView(ListView):
 class BlogUpdateView(UpdateView):
     model = Blog
     fields = ('title', 'post_content', 'image')
-    # success_url = reverse_lazy('blog:list')
 
     def form_valid(self, form):
         new_post = form.save(commit=False)
@@ -64,7 +63,5 @@ def toggle_activity(request, pk):
         blog_item.publication_sign = False
     else:
         blog_item.publication_sign = True
-
     blog_item.save()
-
     return redirect(reverse('blog:list'))

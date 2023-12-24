@@ -18,12 +18,9 @@
                 <li>- {{ object.date_making }}</li>
                 {% if object.active_version_name %}
                     <p>Активная версия: {{object.active_version_name}}<br>
-<!--                {% else %}-->
-<!--                    <p>Активная версия отсутствует <br>-->
+                {% else %}
+                    <p>Активная версия отсутствует <br>
                 {% endif %}
-
-<!--                    <li>- Активная версия: {{object.active_version_name | title}}</li>-->
-
             </ul>
             <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
         </div>

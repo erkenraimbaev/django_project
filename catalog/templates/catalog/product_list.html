@@ -26,9 +26,7 @@
                         <p>Активная версия: {{ object.active_version_name }}<br>
                     {% else %}
                         <p>Активная версия отсутствует <br>
-<!--                    <li>- Активная версия: {{object.active_version_name | title}}</li>-->
                     {% endif %}
-
                 </ul>
                 <a href="{% url 'catalog:product' object.pk %}" type="button" class="btn btn-sm btn-block btn-outline-primary">Подробнее</a>
                 <a href="{% url 'catalog:edit' object.pk %}" type="button" class="btn btn-sm btn-info">Изменить</a>
@@ -37,9 +35,7 @@
                 <button type="button" class="btn btn-sm btn-outline-primary">Купить</button>
                 </p>
                 <div class="d-flex justify-content-between align-items-center">
-
                 </div>
-
             </div>
         </div>
     </div>

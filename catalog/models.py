@@ -4,35 +4,19 @@ from django.db import connection
 NULLABLE = {'blank': True, 'null': True}
 
 
-# Create your models here.
 class Category(models.Model):
-    """
-    Модель для отображения таблицы Категории в БД
-    """
     name_category = models.CharField(max_length=100, verbose_name='наименование')
     description = models.TextField(verbose_name='описание')
 
     def __str__(self):
-        """
-        Строковое отображение объекта
-        :return:
-        """
         return f'{self.name_category}'
 
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
 
-    @classmethod
-    def truncate_table_restart_id(cls):
-        with connection.cursor() as cursor:
-            cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
-
 
 class Product(models.Model):
-    """
-    Модель для отображения таблицы Продукты в БД
-    """
     name_product = models.CharField(max_length=100, verbose_name='наименование')
     description = models.TextField(verbose_name='описание')
     image = models.ImageField(upload_to='products/', verbose_name='изображение', **NULLABLE)
@@ -42,43 +26,22 @@ class Product(models.Model):
     date_changing = models.DateTimeField(auto_now_add=True, verbose_name='дата последнег оизменения')
 
     def __str__(self):
-        """
-        Строковое отображение объекта
-        :return:
-        """
         return f'{self.name_product} {self.category} {self.price} {self.date_making}'
 
     class Meta:
         verbose_name = 'продукт'
         verbose_name_plural = 'продукты'
 
-    @classmethod
-    def truncate_table_restart_id(cls):
-        with connection.cursor() as cursor:
-            cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
-
 
 class Version(models.Model):
-    """
-    Модель для отображения версии продукта
-    """
     product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='название продукта')
     version = models.PositiveIntegerField(verbose_name='номер версии')
     name_version = models.CharField(max_length=150, verbose_name='название версии')
     current_version = models.BooleanField(default=True, verbose_name='признак текущей версии')
 
     def __str__(self):
-        """
-        Строковое отображение объекта
-        :return:
-        """
         return f'{self.version} {self.name_version} {self.product} {self.current_version}'
 
     class Meta:
         verbose_name = 'версия'
         verbose_name_plural = 'версии'
-
-    @classmethod
-    def truncate_table_restart_id(cls):
-        with connection.cursor() as cursor:
-            cursor.execute(f'TRUNCATE TABLE {cls._meta.db_table} RESTART IDENTITY CASCADE')
