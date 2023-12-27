@@ -1,27 +1,74 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
-<div class="col-12">
-    <div class="row">
-        <div class="col-6">
+<div class="row">
+
+    <div class="col-6">
+        <form  method="post" enctype="multipart/form-data">
+
             <div class="card">
-               <div class="card-body">
-                   <form method="post">
-                       {% csrf_token %}
-                       {{ form.as_p }}
-                       <button type="submit" class="btn btn-success">
-                           {% if object %}
-                                Сохранить
-                           {% else %}
-                                Создать
-                           {% endif %}
-                       </button>
-
-                   </form>
-               </div>
+                <div class="card-header">
+                    <h3 class="card-title">
+                        {% if object %}
+                        Изменение продукта
+                        {% else %}
+                        Добавление продукта
+                        {% endif %}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit" class="btn btn-success">
+                            {% if object %}
+                            Сохранить
+                            {% else %}
+                            Создать
+                            {% endif %}
+                        </button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
+        {% if object %}
+            <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Версия для продукта
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="formset">
+                        {{ formset.management_form }}
+                        {% for form in formset.forms %}
+                        <div class="formset_row">
+                            {% for field in form.visible_fields %}
+                            <div class="formset-col">
+                                {% if forloop.first %}
+                                {% for hidden in form.hidden_fields %}
+                                {{ hidden }}
+                                {% endfor %}
+                                {% endif %}
+                                {{ field.errors.as_ul }}
+                                {% if not forloop.last %}
+                                {{ field.label }}
+                                {% endif %}
+                                {{ field }}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-success">
+                            Сохранить
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        </div>
 </div>
-
 {% endblock %}
