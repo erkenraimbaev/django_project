@@ -14,6 +14,11 @@ class ProductCreateView(CreateView):
     form_class = ProductForm
     success_url = reverse_lazy('catalog:home')
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.owner = self.request.user
+        self.object.save()
+
 
 class ProductListView(ListView):
     model = Product
@@ -33,8 +38,6 @@ class ProductDetailView(DetailView):
         product = context_data.get('object')
         set_product_version(product)
         return context_data
-
-
 
 
 class ProductUpdateView(UpdateView):
