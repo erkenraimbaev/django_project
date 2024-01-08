@@ -16,6 +16,11 @@
                 <li>- Описание - {{object.description | title | slice:":100"}}</li>
                 <li>- Категория - {{object.category | title}}</li>
                 <li>- {{ object.date_making }}</li>
+                {% if object.owner %}
+                    <li>- Создатель: {{ object.owner }} </li>
+                {% else %}
+                    <li>- Создатель отсутствует </li>
+                {% endif %}
                 <li>-
                     {% if object.active_version_name %}
                         <p>Активная версия: {{ object.active_version_name }}<br>

@@ -7,7 +7,9 @@
 
 <div class="row text-center">
     <div class="col-12 mb-5">
-    <a class="btn btn-lg btn-outline-primary" href="{% url 'catalog:create' %}">Добавить продукт</a>
+        {% if object.email_is_confirmed %}
+            <a class="btn btn-lg btn-outline-primary" href="{% url 'catalog:create' %}">Добавить продукт</a>
+        {% endif %}
     </div>
     {% for object in object_list %}
     <div class="col-3">
