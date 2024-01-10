@@ -155,3 +155,4 @@ EMAIL_HOST_PASSWORD = 'wmipyxbdjqmgwpdo'
 # EMAIL_USE_SSL = False
 # EMAIL_HOST_USER = 'your@gmail.com'
 # EMAIL_HOST_PASSWORD = 'app_password'
+
